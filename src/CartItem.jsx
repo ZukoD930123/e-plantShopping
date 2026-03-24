@@ -7,29 +7,42 @@ const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calculate total amount for all products in the cart
+  // Task 3.1: Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
- 
+    return cart.reduce((total, item) => {
+      const cost = parseFloat(item.cost.substring(1));
+      return total + (cost * item.quantity);
+    }, 0);
   };
 
+  // Task 3.2: Continue shopping
   const handleContinueShopping = (e) => {
-   
+    onContinueShopping(e);
   };
 
-
-
+  // Task 3.4: Increment quantity
   const handleIncrement = (item) => {
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
 
+  // Task 3.4: Decrement quantity
   const handleDecrement = (item) => {
-   
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem(item.name));
+    }
   };
 
+  // Task 3.5: Remove plant from the cart
   const handleRemove = (item) => {
+    dispatch(removeItem(item.name));
   };
 
-  // Calculate total cost based on quantity for an item
+  // Task 3.6: Calculate total cost for a specific item
   const calculateTotalCost = (item) => {
+    const cost = parseFloat(item.cost.substring(1));
+    return cost * item.quantity;
   };
 
   return (
