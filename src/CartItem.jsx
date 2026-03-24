@@ -20,19 +20,19 @@ const CartItem = ({ onContinueShopping }) => {
     onContinueShopping(e);
   };
 
-  // Task 3.4: Increment quantity
-  const handleIncrement = (item) => {
-    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
-  };
+// Task 3.4: Increment quantity
+const handleIncrement = (item) => {
+  dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
+};
 
-  // Task 3.4: Decrement quantity
-  const handleDecrement = (item) => {
-    if (item.quantity > 1) {
-      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
-    } else {
-      dispatch(removeItem(item.name));
-    }
-  };
+// Task 3.4: Decrement quantity
+const handleDecrement = (item) => {
+  if (item.quantity > 1) {
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+  } else {
+    dispatch(removeItem(item.name));
+  }
+};
 
   // Task 3.5: Remove plant from the cart
   const handleRemove = (item) => {
@@ -47,9 +47,9 @@ const CartItem = ({ onContinueShopping }) => {
 
   return (
     <div className="cart-container">
-      <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
-      <div>
-        {cart.map(item => (
+<h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount().toFixed(2)}</h2>
+<div>
+  {cart.map(item => (
           <div className="cart-item" key={item.name}>
             <img className="cart-item-image" src={item.image} alt={item.name} />
             <div className="cart-item-details">
